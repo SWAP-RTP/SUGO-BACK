@@ -1,12 +1,8 @@
 import express from "express";
-import cors from "cors";
 import sequelize from "./DB/db";
+import app from "./app";
 
-const app = express();
 const PORT = process.env.PORT || 3000;
-
-app.use(cors());
-app.use(express.json());
 
 app.get("/test-db", async (req, res) => {
   try {
