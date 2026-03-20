@@ -54,5 +54,5 @@ Motivo.init(
     sequelize,
     tableName: "pv_estados_motivos",
     timestamps: true,
-  }
+  },
 );
