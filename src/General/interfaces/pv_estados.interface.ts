@@ -3,6 +3,7 @@ export interface pv_estados {
   momento: string;
   tipo: number;
   eco: number;
+  eco_estatus: number;
   eco_tipo: number;
   motivo_id: number;
   motivo_desc: string;

@@ -4,7 +4,7 @@ import { DataTypes, Model } from "sequelize";
 import sequelize from "../DB/db";
 
 // importamos la interfaz que define la estructura de los datos del motivo
-import { pv_estados } from "../interfaces/Pv_estados.interface";
+import { pv_estados } from "../interfaces/pv_estados.interface";
 
 export class Pv_estados extends Model<pv_estados> {}
 
@@ -24,6 +24,10 @@ Pv_estados.init(
       allowNull: false,
     },
     eco: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    eco_estatus: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
