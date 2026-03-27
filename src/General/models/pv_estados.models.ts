@@ -8,7 +8,7 @@ import { pv_estados } from "../interfaces/pv_estados.interface";
 
 export class Pv_estados extends Model<pv_estados> {}
 
-Pv_estados.init(
+Pv_estados.init(  
   {
     id: {
       type: DataTypes.INTEGER,
