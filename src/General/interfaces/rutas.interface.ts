@@ -1,3 +1,10 @@
+export interface RutaPunto {
+  punto_cve: number;
+  punto_nombre: string;
+  punto_descrip: string;
+  punto_status: number;
+}
+
 export interface Ruta {
   ruta_cve_sist: number;
   mod_clave: number;
@@ -7,7 +14,7 @@ export interface Ruta {
   ruta_cve_servicio: number;
   ruta_cve_tipo: number;
   institucion_cve: number;
-  ruta_nombre: number;
+  ruta_nombre: string; // Cambiar de number a string
   ruta_trayecto: string;
   ruta_trayecto_descrip: string;
   ruta_km: number;
@@ -17,4 +24,6 @@ export interface Ruta {
   ruta_datos_modif: string;
   ruta_obs: string;
   ruta_status: number;
+  nombre_origen?: string; // AGREGAR
+  nombre_destino?: string; // AGREGAR
 }
