@@ -5,10 +5,11 @@ import sequelize from "../DB/db";
 
 // importamos la interfaz que define la estructura de los datos del motivo
 import { pv_estados } from "../interfaces/pv_estados.interface";
+import { Motivo } from "./motivos.models";
 
-export class Pv_estados extends Model<pv_estados> {}
+export class Pv_estados extends Model<pv_estados> { }
 
-Pv_estados.init(  
+Pv_estados.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -122,3 +123,9 @@ Pv_estados.init(
     timestamps: false,
   },
 );
+
+Pv_estados.belongsTo(Motivo, {
+  foreignKey: "motivo_id",
+  targetKey: "id",
+  as: "detalleMotivo"
+});

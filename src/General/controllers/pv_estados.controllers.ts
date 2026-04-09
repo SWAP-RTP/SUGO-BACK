@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import {
   obtenerPv_estados,
   crearPv_estado,
+  obtenerPv_estados_Recepcion
 } from "../services/pv_estados.services";
 
 export async function getPv_estados(req: Request, res: Response) {
@@ -13,6 +14,16 @@ export async function getPv_estados(req: Request, res: Response) {
     res
       .status(500)
       .json({ message: "Error al obtener los estados de PV", error: error });
+  }
+}
+
+export async function getPv_estados_Recepcion(req: Request, res: Response) {
+  try {
+    const pv_estados = await obtenerPv_estados_Recepcion();
+    res.json(pv_estados);
+  } catch (error) {
+    console.error("Error al obtener los estados de recepcion", error);
+    res.status(500).json({ message: "Error al obtener los estados de Recepcion", error: error });
   }
 }
 
