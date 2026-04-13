@@ -40,7 +40,7 @@ export const obtenerRutas = async () => {
 
     return rutas;
   } catch (error) {
-    console.error("Error al obtener las rutas:", error);
+    console.error("Error al obtener las rutas del back:", error);
     throw error;
   }
 };
