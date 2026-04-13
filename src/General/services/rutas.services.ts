@@ -17,7 +17,7 @@ export const obtenerRutas = async () => {
         op.ruta_nombre,
         op.ruta_trayecto,
         op.ruta_trayecto_descrip,
-        op.ruta_km,
+        op.ruta_km,.
         op.ruta_kmdo,
         op.ruta_imagen,
         op.ruta_fecha_alta,

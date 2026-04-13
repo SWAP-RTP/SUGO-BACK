@@ -1,6 +1,7 @@
 import express from "express";
 import sequelize from "./DB/db";
 import app from "./app";
+import "../rol/index"; // ← AGREGAR ESTA LÍNEA para importar el rol
 
 const PORT = process.env.PORT || 3000;
 
