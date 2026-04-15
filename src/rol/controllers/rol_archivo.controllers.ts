@@ -22,7 +22,9 @@ export const uploadRolArchivo = async (req: Request, res: Response) => {
       usuario: "usuario_demo",
     });
 
-    res.status(200).json({ message: "Archivo guardado", numSheets, sheetNames });
+    res
+      .status(200)
+      .json({ message: "Archivo guardado", numSheets, sheetNames });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error al guardar el archivo" });
