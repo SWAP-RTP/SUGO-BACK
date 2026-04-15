@@ -6,6 +6,7 @@ import pvEstadosRoutes from "./routes/pv_estados.routes";
 import modalidadRoutes from "./routes/modalidad.routes";
 import rutasRoutes from "./routes/rutas.routes";
 import rolCabeceraRoutes from "../rol/routes/rol_cabecera.routes";
+import uploadRolArchivoRoutes from "../rol/routes/rol_archivo.routes";
 
 const app = express();
 
@@ -21,5 +22,5 @@ app.use("/api", rutasRoutes);
 
 // ROL
 app.use("/api", rolCabeceraRoutes);
-
+app.use("/api", uploadRolArchivoRoutes);
 export default app;
