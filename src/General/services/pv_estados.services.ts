@@ -40,3 +40,9 @@ export async function crearPv_estado(data: any) {
   const PostPv = await Pv_estados.create(data);
   return PostPv;
 }
+
+export const eliminarPvEstado = async (id: number) => {
+  const registro = await Pv_estados.findByPk(id);
+  if (!registro) throw new Error("Registro no encontrado");
+  await registro.destroy();
+};
