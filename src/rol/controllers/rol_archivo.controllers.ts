@@ -9,6 +9,15 @@ export const uploadRolArchivo = async (req: Request, res: Response) => {
       return res.status(400).json({ error: "No se envió ningún archivo" });
     }
 
+    const modulo = Number(req.body.modulo);
+    const periodo = Number(req.body.periodo);
+
+    if (Number.isNaN(modulo) || Number.isNaN(periodo)) {
+      return res.status(400).json({
+        error: "Modulo y periodo son obligatorios y deben ser numéricos",
+      });
+    }
+
     // Procesar el archivo para contar hojas
     const workbook = XLSX.read(req.file.buffer, { type: "buffer" });
     const numSheets = workbook.SheetNames.length;
@@ -20,11 +29,19 @@ export const uploadRolArchivo = async (req: Request, res: Response) => {
       archivo: req.file.buffer,
       path: req.file.originalname, // o la ruta donde lo guardas, si aplica
       usuario: "usuario_demo",
+      modulo,
+      periodo,
     });
 
     res
       .status(200)
-      .json({ message: "Archivo guardado", numSheets, sheetNames });
+      .json({
+        message: "Archivo guardado",
+        numSheets,
+        sheetNames,
+        modulo,
+        periodo,
+      });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error al guardar el archivo" });
