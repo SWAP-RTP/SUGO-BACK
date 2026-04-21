@@ -8,6 +8,7 @@ import rutasRoutes from "./routes/rutas.routes";
 import uploadRolArchivoRoutes from "../rol/routes/rol_archivo.routes";
 import periodosRoutes from "../rol/routes/rol_periodos.routes";
 import rolRutasRoutes from "../rol/routes/rol_rutas.routes";
+import turnosRoutes from "../rol/routes/rol_turnos.routes";
 
 const app = express();
 
@@ -25,4 +26,5 @@ app.use("/api", rutasRoutes);
 app.use("/api", uploadRolArchivoRoutes);
 app.use("/api", periodosRoutes);
 app.use("/api", rolRutasRoutes);
+app.use("/api", turnosRoutes);
 export default app;
