@@ -1,11 +1,15 @@
 import { Request, Response } from "express";
+import sequelize from "../../General/DB/db";
 import { saveRolArchivo } from "../services/rol_archivo.services";
+import { guardarRutasRolLote } from "../services/rol_rutas.services";
 import { rolArchivo } from "../models/rol_archivo.models";
 import * as XLSX from "xlsx";
 
 export const uploadRolArchivo = async (req: Request, res: Response) => {
   try {
-    if (!req.file) {
+    const archivoSubido = req.file;
+
+    if (!archivoSubido) {
       return res.status(400).json({ error: "No se envió ningún archivo" });
     }
 
@@ -19,29 +23,51 @@ export const uploadRolArchivo = async (req: Request, res: Response) => {
     }
 
     // Procesar el archivo para contar hojas
-    const workbook = XLSX.read(req.file.buffer, { type: "buffer" });
+    const workbook = XLSX.read(archivoSubido.buffer, { type: "buffer" });
     const numSheets = workbook.SheetNames.length;
     const sheetNames = workbook.SheetNames; // Obtén los nombres de las hojas
 
-    // Guardar en la base de datos (debes agregar la columna archivo en el modelo y migración)
-    await saveRolArchivo({
-      nombre: req.file.originalname,
-      archivo: req.file.buffer,
-      path: req.file.originalname, // o la ruta donde lo guardas, si aplica
-      usuario: "usuario_demo",
-      modulo,
-      periodo,
+    const resultado = await sequelize.transaction(async (transaction) => {
+      const archivoGuardado = await saveRolArchivo(
+        {
+          nombre: archivoSubido.originalname,
+          archivo: archivoSubido.buffer,
+          path: archivoSubido.originalname,
+          usuario: "usuario_demo",
+          modulo,
+          periodo,
+        },
+        transaction,
+      );
+
+      const idArchivo = archivoGuardado.getDataValue("id") as number;
+
+      const rutasGuardadas = await guardarRutasRolLote(
+        sheetNames
+          .map((nombreRuta) => nombreRuta.trim())
+          .filter((nombreRuta) => nombreRuta.length > 0)
+          .map((nombreRuta) => ({
+            id_archivo: idArchivo,
+            nombre_ruta: nombreRuta,
+          })),
+        transaction,
+      );
+
+      return {
+        archivoGuardado,
+        rutasGuardadas,
+      };
     });
 
-    res
-      .status(200)
-      .json({
-        message: "Archivo guardado",
-        numSheets,
-        sheetNames,
-        modulo,
-        periodo,
-      });
+    res.status(200).json({
+      message: "Archivo guardado",
+      numSheets,
+      sheetNames,
+      modulo,
+      periodo,
+      id_archivo: resultado.archivoGuardado.getDataValue("id") as number,
+      rutas_guardadas: resultado.rutasGuardadas.length,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error al guardar el archivo" });
