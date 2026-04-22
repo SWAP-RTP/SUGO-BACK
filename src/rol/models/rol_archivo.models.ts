@@ -24,6 +24,14 @@ rolArchivo.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    modulo: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    periodo: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,

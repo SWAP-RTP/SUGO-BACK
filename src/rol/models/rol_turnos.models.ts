@@ -1,44 +1,54 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../../General/DB/db";
-import { CabeceraRol } from "../interfaces/rol_cabecera.interfaces";
+import { RolTurnos } from "../interfaces/rol_turnos.interfaces";
 
-export class RolCabecera extends Model<CabeceraRol> {}
+export class Turnos extends Model<RolTurnos> {}
 
-RolCabecera.init(
+Turnos.init(
   {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    periodos: {
+    id_archivo: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    ruta: {
+    economico: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    origen: {
+    sistema: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    primer_t: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    modalidad: {
+    segundo_t: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    destino: {
+    tercer_t: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    modulo: {
-      type: DataTypes.INTEGER,
+    createdat: {
+      type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    updatedat: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
     },
   },
   {
     sequelize,
-    tableName: "rol_cabecera",
+    tableName: "rol_turnos",
     timestamps: false,
   },
 );

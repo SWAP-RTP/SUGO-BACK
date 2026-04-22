@@ -1,4 +1,4 @@
-import "./models/rol_cabecera.models";
-import rolCabeceraRoutes from "./routes/rol_cabecera.routes";
-
-export { rolCabeceraRoutes };
+import "./models/rol_archivo.models";
+import "./models/rol_periodos.models";
+import "./models/rol_rutas.models";
+import "./models/rol_turnos.models";
