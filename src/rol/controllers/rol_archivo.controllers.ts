@@ -3,6 +3,7 @@ import sequelize from "../../General/DB/db";
 import { saveRolArchivo } from "../services/rol_archivo.services";
 import { guardarRutasRolLote } from "../services/rol_rutas.services";
 import { guardarTurnosRolLote } from "../services/rol_turnos.services";
+import { guardarDetallesTurnosLote } from "../services/rol_turno_detalle.services";
 import { rolArchivo } from "../models/rol_archivo.models";
 import { rolRutas } from "../models/rol_rutas.models";
 import * as XLSX from "xlsx";
@@ -88,6 +89,28 @@ export const uploadRolArchivo = async (req: Request, res: Response) => {
 
       // Preparar turnos para guardar
       const turnosParaGuardar: any[] = [];
+      const turnosLVParaGuardar: any[] = [];
+      const turnosSDParaGuardar: any[] = [];
+      const turnosDomParaGuardar: any[] = [];
+
+      const mapDetalleTurno = (fila: any): any => ({
+          id_archivo: idArchivo,
+          economico: Number(fila.economico) || 0,
+          hora_inicio_1: fila.horaInicioTurno1 || null,
+          hora_inicio_cc_1: fila.horaInicioCC || null,
+          lugar_inicio_1: fila.lugarInicio1 || null,
+          hora_termino_turno_1: fila.horaTerminoTurno1 || null,
+          lugar_inicio_2: fila.lugarInicio2 || null,
+          hora_inicio_2: fila.horaInicio2 || null,
+          hora_termino_turno_2: fila.horaTerminoTurno2 || null,
+          lugar_inicio_3: fila.lugarInicio3 || null,
+          hora_inicio_turno_3: fila.horaInicioTurno3 || null,
+          hora_termino_cc_t: fila.horaTerminoCC || null,
+          lugar_termino_cc_t: fila.lugarTerminoCC || null,
+          termino_modulo_t: fila.terminoModulo || null,
+          termino_turno_t: fila.terminoTurno || null,
+      });
+
       if (Array.isArray(hojasRoles)) {
         hojasRoles.forEach((hoja) => {
           if (Array.isArray(hoja.filas)) {
@@ -110,6 +133,16 @@ export const uploadRolArchivo = async (req: Request, res: Response) => {
               }
             });
           }
+
+          if (Array.isArray(hoja.filasLV)) {
+            hoja.filasLV.forEach((fila: any) => turnosLVParaGuardar.push(mapDetalleTurno(fila)));
+          }
+          if (Array.isArray(hoja.filasSabado)) {
+            hoja.filasSabado.forEach((fila: any) => turnosSDParaGuardar.push(mapDetalleTurno(fila)));
+          }
+          if (Array.isArray(hoja.filasDomingo)) {
+            hoja.filasDomingo.forEach((fila: any) => turnosDomParaGuardar.push(mapDetalleTurno(fila)));
+          }
         });
       }
 
@@ -128,10 +161,25 @@ export const uploadRolArchivo = async (req: Request, res: Response) => {
         );
       }
 
+      // Guardar detalles de turnos en lote
+      let detallesGuardados: any = { lvGuardados: [], sdGuardados: [], domGuardados: [] };
+      if (turnosLVParaGuardar.length > 0 || turnosSDParaGuardar.length > 0 || turnosDomParaGuardar.length > 0) {
+        detallesGuardados = await guardarDetallesTurnosLote(
+          turnosLVParaGuardar,
+          turnosSDParaGuardar,
+          turnosDomParaGuardar,
+          transaction
+        );
+        console.log(`✅ Detalles LV guardados: ${detallesGuardados.lvGuardados.length}`);
+        console.log(`✅ Detalles SD guardados: ${detallesGuardados.sdGuardados.length}`);
+        console.log(`✅ Detalles Dom guardados: ${detallesGuardados.domGuardados.length}`);
+      }
+
       return {
         archivoGuardado,
         rutasGuardadas,
         turnosGuardados,
+        detallesGuardados,
       };
     });
 
@@ -144,6 +192,9 @@ export const uploadRolArchivo = async (req: Request, res: Response) => {
       id_archivo: resultado.archivoGuardado.getDataValue("id") as number,
       rutas_guardadas: resultado.rutasGuardadas.length,
       turnos_guardados: resultado.turnosGuardados.length,
+      turnos_lv_guardados: resultado.detallesGuardados.lvGuardados.length,
+      turnos_sd_guardados: resultado.detallesGuardados.sdGuardados.length,
+      turnos_dom_guardados: resultado.detallesGuardados.domGuardados.length,
     });
   } catch (error) {
     console.error("Error completo:", error);
