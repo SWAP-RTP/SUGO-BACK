@@ -29,6 +29,9 @@ export async function getPv_estados_Recepcion(req: Request, res: Response) {
   }
 }
 
+// Controller para crear un estado de PV
+
+
 export async function postPv_estado(req: Request, res: Response) {
   try {
     const data = req.body;
