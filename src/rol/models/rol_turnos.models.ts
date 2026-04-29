@@ -15,6 +15,10 @@ Turnos.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    nombre_ruta: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     economico: {
       type: DataTypes.INTEGER,
       allowNull: false,

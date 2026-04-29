@@ -17,61 +17,65 @@ export class Rol_Detalle_LV extends Model<RolTurnoDetalle> {}
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    nombre_ruta: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     economico: {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
     hora_inicio_1: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     hora_inicio_cc_1: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     lugar_inicio_1: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
     },
     hora_termino_turno_1: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     lugar_inicio_2: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
     },
     hora_inicio_2: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     hora_termino_turno_2: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     lugar_inicio_3: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
     },
     hora_inicio_turno_3: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     hora_termino_cc_t: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     lugar_termino_cc_t: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
     },
     termino_modulo_t: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     termino_turno_t: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     
 
@@ -99,61 +103,65 @@ export class Rol_Detalle_SD extends Model<RolTurnoDetalle> {}
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    nombre_ruta: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     economico: {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
     hora_inicio_1: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     hora_inicio_cc_1: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     lugar_inicio_1: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
     },
     hora_termino_turno_1: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     lugar_inicio_2: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
     },
     hora_inicio_2: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     hora_termino_turno_2: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     lugar_inicio_3: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
     },
     hora_inicio_turno_3: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     hora_termino_cc_t: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     lugar_termino_cc_t: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
     },
     termino_modulo_t: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     termino_turno_t: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     
 
@@ -180,61 +188,65 @@ export class Rol_Detalle_Dom extends Model<RolTurnoDetalle> {}
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    nombre_ruta: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     economico: {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
     hora_inicio_1: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     hora_inicio_cc_1: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     lugar_inicio_1: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
     },
     hora_termino_turno_1: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     lugar_inicio_2: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
     },
     hora_inicio_2: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     hora_termino_turno_2: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     lugar_inicio_3: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
     },
     hora_inicio_turno_3: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     hora_termino_cc_t: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     lugar_termino_cc_t: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
     },
     termino_modulo_t: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     termino_turno_t: {
         type: DataTypes.TIME,
-        allowNull: true,
+        allowNull: false,
     },
     
 

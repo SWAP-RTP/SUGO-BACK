@@ -93,8 +93,9 @@ export const uploadRolArchivo = async (req: Request, res: Response) => {
       const turnosSDParaGuardar: any[] = [];
       const turnosDomParaGuardar: any[] = [];
 
-      const mapDetalleTurno = (fila: any): any => ({
+      const mapDetalleTurno = (fila: any, nombreRuta: string): any => ({
           id_archivo: idArchivo,
+          nombre_ruta: nombreRuta,
           economico: Number(fila.economico) || 0,
           hora_inicio_1: fila.horaInicioTurno1 || null,
           hora_inicio_cc_1: fila.horaInicioCC || null,
@@ -124,6 +125,7 @@ export const uploadRolArchivo = async (req: Request, res: Response) => {
               if (!Number.isNaN(economico)) {
                 turnosParaGuardar.push({
                   id_archivo: idArchivo,
+                  nombre_ruta: hoja.nombreHoja,
                   economico: economico || 0,
                   sistema: fila.sistema || "",
                   primer_t: primerT || 0,
@@ -135,13 +137,13 @@ export const uploadRolArchivo = async (req: Request, res: Response) => {
           }
 
           if (Array.isArray(hoja.filasLV)) {
-            hoja.filasLV.forEach((fila: any) => turnosLVParaGuardar.push(mapDetalleTurno(fila)));
+            hoja.filasLV.forEach((fila: any) => turnosLVParaGuardar.push(mapDetalleTurno(fila, hoja.nombreHoja)));
           }
           if (Array.isArray(hoja.filasSabado)) {
-            hoja.filasSabado.forEach((fila: any) => turnosSDParaGuardar.push(mapDetalleTurno(fila)));
+            hoja.filasSabado.forEach((fila: any) => turnosSDParaGuardar.push(mapDetalleTurno(fila, hoja.nombreHoja)));
           }
           if (Array.isArray(hoja.filasDomingo)) {
-            hoja.filasDomingo.forEach((fila: any) => turnosDomParaGuardar.push(mapDetalleTurno(fila)));
+            hoja.filasDomingo.forEach((fila: any) => turnosDomParaGuardar.push(mapDetalleTurno(fila, hoja.nombreHoja)));
           }
         });
       }
