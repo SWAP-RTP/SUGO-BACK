@@ -1,6 +1,7 @@
 export interface RolTurnoDetalle {
   id?: number;
   id_archivo: number;
+  nombre_ruta: string;
   economico: number;
   hora_inicio_1: string | null;
   hora_inicio_cc_1: string | null;
