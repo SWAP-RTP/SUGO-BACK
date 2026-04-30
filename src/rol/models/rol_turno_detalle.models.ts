@@ -78,16 +78,12 @@ export class Rol_Detalle_LV extends Model<RolTurnoDetalle> {}
         allowNull: false,
     },
     
-
-
 },{
     sequelize,
     tableName: "rol_turno_lv",
     timestamps: false,
 
 });
-
-
 
 // modelo para informacion de sabado y domingo
 export class Rol_Detalle_SD extends Model<RolTurnoDetalle> {}
@@ -172,9 +168,7 @@ export class Rol_Detalle_SD extends Model<RolTurnoDetalle> {}
 
 });
 
-
 // modelo para informacion del domingo
-
 export class Rol_Detalle_Dom extends Model<RolTurnoDetalle> {}
 
     Rol_Detalle_Dom.init({

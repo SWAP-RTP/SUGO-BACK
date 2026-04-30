@@ -94,3 +94,5 @@ export const guardarDetallesTurnosLote = async (
         throw new Error("Error al guardar los detalles de los turnos en lote");
     }
 }
+
+// update
