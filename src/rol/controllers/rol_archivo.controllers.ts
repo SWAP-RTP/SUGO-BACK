@@ -131,6 +131,13 @@ export const uploadRolArchivo = async (req: Request, res: Response) => {
                   primer_t: primerT || 0,
                   segundo_t: segundoT || 0,
                   tercer_t: tercerT || 0,
+                  lunes: !!fila.lunes,
+                  martes: !!fila.martes,
+                  miercoles: !!fila.miercoles,
+                  jueves: !!fila.jueves,
+                  viernes: !!fila.viernes,
+                  sabado: !!fila.sabado,
+                  domingo: !!fila.domingo,
                 });
               }
             });

@@ -7,6 +7,13 @@ export interface RolTurnos {
   primer_t: number;
   segundo_t: number;
   tercer_t: number;
+  lunes?: boolean;
+  martes?: boolean;
+  miercoles?: boolean;
+  jueves?: boolean;
+  viernes?: boolean;
+  sabado?: boolean;
+  domingo?: boolean;
   createdat: Date;
   updatedat: Date;
 }
