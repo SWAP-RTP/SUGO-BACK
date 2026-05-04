@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import sequelize from "../../General/DB/db";
 import { obtenerTurnosRol } from "../services/rol_turnos.services";
-import { guardarTurnosRolLote } from "../services/rol_turnos.services";
+import { guardarTurnosRolLote, guardarTurnoEditado } from "../services/rol_turnos.services";
 
 export const getTurnosRol = async (req: Request, res: Response) => {
   try {
@@ -24,5 +24,19 @@ export const postTurnosRol = async (req: Request, res: Response) => {
   } catch (error) {
     console.error("Error al guardar los turnos del rol:", error);
     res.status(500).json({ error: "Error al guardar los turnos del rol" });
+  }
+};
+
+export const postTurnoEditado = async (req: Request, res: Response) => {
+  try {
+    const turnoData = req.body;
+    const resultado = await guardarTurnoEditado(turnoData);
+    res.status(201).json({
+      message: "Turno editado guardado exitosamente",
+      data: resultado,
+    });
+  } catch (error) {
+    console.error("Error al guardar el turno editado:", error);
+    res.status(500).json({ error: "Error al guardar el turno editado" });
   }
 };
