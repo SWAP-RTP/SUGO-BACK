@@ -2,7 +2,7 @@ import { DataTypes, Model } from "sequelize";
 import sequelize from "../../General/DB/db";
 import { RolTurnos } from "../interfaces/rol_turnos.interfaces";
 
-export class Turnos extends Model<RolTurnos> {}
+export class Turnos extends Model<RolTurnos> { }
 
 Turnos.init(
   {

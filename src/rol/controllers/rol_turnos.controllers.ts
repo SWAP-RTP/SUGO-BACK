@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import sequelize from "../../General/DB/db";
 import { obtenerTurnosRol } from "../services/rol_turnos.services";
-import { guardarTurnosRolLote, guardarTurnoEditado } from "../services/rol_turnos.services";
+import { guardarTurnosRolLote, guardarTurnoEditado, ejecutarCierreDia } from "../services/rol_turnos.services";
 
 export const getTurnosRol = async (req: Request, res: Response) => {
   try {
@@ -38,5 +38,24 @@ export const postTurnoEditado = async (req: Request, res: Response) => {
   } catch (error) {
     console.error("Error al guardar el turno editado:", error);
     res.status(500).json({ error: "Error al guardar el turno editado" });
+  }
+};
+
+export const postCierreDia = async (req: Request, res: Response) => {
+  try {
+    // Ejecutar el stored procedure
+    const resultado = await ejecutarCierreDia();
+
+    // Después de ejecutar el SP, obtener los nuevos datos del último lote
+    const nuevosTurnos = await obtenerTurnosRol();
+
+    res.status(200).json({
+      message: "Cierre de día ejecutado exitosamente",
+      id_operacion: resultado.id_operacion,
+      data: nuevosTurnos,
+    });
+  } catch (error) {
+    console.error("Error al ejecutar cierre de día:", error);
+    res.status(500).json({ error: "Error al ejecutar el cierre de día" });
   }
 };

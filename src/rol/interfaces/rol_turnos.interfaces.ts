@@ -16,4 +16,5 @@ export interface RolTurnos {
   domingo?: boolean;
   createdat: Date;
   updatedat: Date;
+  id_operacion?: string;
 }

@@ -77,6 +77,10 @@ TurnosEdit.init(
       allowNull: true,
       defaultValue: DataTypes.NOW,
     },
+    id_operacion: {
+      type: DataTypes.UUID,
+      allowNull: true,
+    },
   },
   {
     sequelize,
