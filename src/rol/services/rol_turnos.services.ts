@@ -1,6 +1,6 @@
 import { Turnos } from "../models/rol_turnos.models";
 import { TurnosEdit } from "../models/rol_turnos_edit.models";
-import { Transaction, QueryTypes } from "sequelize";
+import { Transaction, QueryTypes, Op } from "sequelize";
 import sequelize from "../../General/DB/db";
 
 import { rolArchivo } from "../models/rol_archivo.models";
@@ -10,7 +10,7 @@ export const obtenerTurnosRol = async () => {
   const ultimoLote = await TurnosEdit.findOne({
     attributes: ['id_operacion'],
     where: {
-      id_operacion: { [require('sequelize').Op.ne]: null }
+      id_operacion: { [Op.ne]: null } as any
     },
     order: [['createdat', 'DESC']],
   });
@@ -43,7 +43,7 @@ export const ejecutarCierreDia = async () => {
   const nuevoLote = await TurnosEdit.findOne({
     attributes: ['id_operacion'],
     where: {
-      id_operacion: { [require('sequelize').Op.ne]: null }
+      id_operacion: { [Op.ne]: null } as any
     },
     order: [['createdat', 'DESC']],
   });
