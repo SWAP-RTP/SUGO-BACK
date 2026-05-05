@@ -3,6 +3,7 @@ import sequelize from "../../General/DB/db";
 import { obtenerTurnosRol } from "../services/rol_turnos.services";
 import { guardarTurnosRolLote, guardarTurnoEditado, ejecutarCierreDia } from "../services/rol_turnos.services";
 
+// controlador para obtener los turnos
 export const getTurnosRol = async (req: Request, res: Response) => {
   try {
     const turnos = await obtenerTurnosRol();
@@ -13,6 +14,7 @@ export const getTurnosRol = async (req: Request, res: Response) => {
   }
 };
 
+// controlador para guardar los turnos
 export const postTurnosRol = async (req: Request, res: Response) => {
   try {
     const turnos = req.body; // Debe ser un array de turnos
@@ -26,6 +28,8 @@ export const postTurnosRol = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Error al guardar los turnos del rol" });
   }
 };
+
+// controlador para editar un turno
 
 export const postTurnoEditado = async (req: Request, res: Response) => {
   try {
@@ -41,6 +45,8 @@ export const postTurnoEditado = async (req: Request, res: Response) => {
   }
 };
 
+
+// controlador para el cierre del día
 export const postCierreDia = async (req: Request, res: Response) => {
   try {
     // Ejecutar el stored procedure
