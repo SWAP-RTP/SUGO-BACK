@@ -1,34 +1,55 @@
 import { Rol_Detalle_LV, Rol_Detalle_SD, Rol_Detalle_Dom } from "../models/rol_turno_detalle.models";
+import { Turnos } from "../models/rol_turnos.models";
 import { RolTurnoDetalle } from "../interfaces/rol_turno_detalle.interfaces";
 import { Transaction } from "sequelize";
+import { rolArchivo } from "../models/rol_archivo.models";
 
-// !*** funciones para obtener (GET)
+//Obtener el detalle de los turnos 
+export const obtener_detalle_turnos = async () => {
+    const ultimoArchivo = await rolArchivo.findOne({ order: [['id', 'DESC']] });
+    if (!ultimoArchivo) return [];
+
+    const detalle_turno = await Turnos.findAll({
+        where: { id_archivo: ultimoArchivo.getDataValue('id') }
+    });
+    return detalle_turno;
+}
 
 // Obtener el detalle de lunes a viernes
 
 export const obtener_detalle_lv = async () => {
+    // Buscamos el último archivo registrado
+    const ultimoArchivo = await rolArchivo.findOne({ order: [['id', 'DESC']] });
+    if (!ultimoArchivo) return [];
 
-    const detalle_lv = await Rol_Detalle_LV.findAll();
+    const detalle_lv = await Rol_Detalle_LV.findAll({
+        where: { id_archivo: ultimoArchivo.getDataValue('id') }
+    });
     return detalle_lv;
-    
 }
 
 // Obtener el detalle de sabado
 
 export const obtener_detalle_sd = async () => {
+    const ultimoArchivo = await rolArchivo.findOne({ order: [['id', 'DESC']] });
+    if (!ultimoArchivo) return [];
 
-    const detalle_sd = await Rol_Detalle_SD.findAll();
+    const detalle_sd = await Rol_Detalle_SD.findAll({
+        where: { id_archivo: ultimoArchivo.getDataValue('id') }
+    });
     return detalle_sd;
-    
 }
 
 // Obtener el detalle de domingo
 
 export const obtener_detalle_dom = async () => {
+    const ultimoArchivo = await rolArchivo.findOne({ order: [['id', 'DESC']] });
+    if (!ultimoArchivo) return [];
 
-    const detalle_dom = await Rol_Detalle_Dom.findAll();
+    const detalle_dom = await Rol_Detalle_Dom.findAll({
+        where: { id_archivo: ultimoArchivo.getDataValue('id') }
+    });
     return detalle_dom;
-    
 }
 
 

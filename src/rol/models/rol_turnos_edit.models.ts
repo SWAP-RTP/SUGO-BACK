@@ -2,9 +2,9 @@ import { DataTypes, Model } from "sequelize";
 import sequelize from "../../General/DB/db";
 import { RolTurnos } from "../interfaces/rol_turnos.interfaces";
 
-export class Turnos extends Model<RolTurnos> { }
+export class TurnosEdit extends Model<RolTurnos> { }
 
-Turnos.init(
+TurnosEdit.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -21,23 +21,23 @@ Turnos.init(
     },
     economico: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     sistema: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     primer_t: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     segundo_t: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     tercer_t: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     lunes: {
       type: DataTypes.BOOLEAN,
@@ -69,18 +69,22 @@ Turnos.init(
     },
     createdat: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       defaultValue: DataTypes.NOW,
     },
     updatedat: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       defaultValue: DataTypes.NOW,
+    },
+    id_operacion: {
+      type: DataTypes.UUID,
+      allowNull: true,
     },
   },
   {
     sequelize,
-    tableName: "rol_turnos",
+    tableName: "rol_turnos_edit",
     timestamps: false,
   },
 );
