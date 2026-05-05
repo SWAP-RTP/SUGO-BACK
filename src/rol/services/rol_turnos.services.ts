@@ -33,6 +33,8 @@ export const obtenerTurnosRol = async () => {
   });
 };
 
+
+
 export const ejecutarCierreDia = async () => {
   // Ejecutar el stored procedure de cierre de día
   await sequelize.query('CALL pr_ejecutar_cierre_dia()', {
