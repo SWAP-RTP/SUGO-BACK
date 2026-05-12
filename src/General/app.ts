@@ -10,6 +10,7 @@ import periodosRoutes from "../rol/routes/rol_periodos.routes";
 import rolRutasRoutes from "../rol/routes/rol_rutas.routes";
 import turnosRoutes from "../rol/routes/rol_turnos.routes";
 import turnoDetalleRoutes from "../rol/routes/rol_turno_detalle.routes";
+import presentacionPVRoutes from "../presentacion/routes/presentacionPV.routes";
 
 const app = express();
 
@@ -29,4 +30,8 @@ app.use("/api", periodosRoutes);
 app.use("/api", rolRutasRoutes);
 app.use("/api", turnosRoutes);
 app.use("/api", turnoDetalleRoutes);
+
+// Hora Presentacion
+app.use("/api", presentacionPVRoutes);
+
 export default app;
