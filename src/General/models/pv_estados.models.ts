@@ -7,7 +7,7 @@ import sequelize from "../DB/db";
 import { pv_estados } from "../interfaces/pv_estados.interface";
 import { Motivo } from "./motivos.models";
 
-export class Pv_estados extends Model<pv_estados> { }
+export class Pv_estados extends Model<pv_estados> {}
 
 Pv_estados.init(
   {
@@ -22,7 +22,7 @@ Pv_estados.init(
     },
     tipo: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     eco: {
       type: DataTypes.INTEGER,
@@ -30,19 +30,19 @@ Pv_estados.init(
     },
     eco_estatus: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     eco_tipo: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     motivo_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     motivo_desc: {
       type: DataTypes.STRING(255),
-      allowNull: false,
+      allowNull: true,
     },
     modulo: {
       type: DataTypes.INTEGER,
@@ -50,31 +50,31 @@ Pv_estados.init(
     },
     direccion: {
       type: DataTypes.STRING(255),
-      allowNull: false,
+      allowNull: true,
     },
     ruta: {
       type: DataTypes.STRING(255),
-      allowNull: false,
+      allowNull: true,
     },
     ruta_modalidad: {
       type: DataTypes.STRING(255),
-      allowNull: false,
+      allowNull: true,
     },
     ruta_cc: {
       type: DataTypes.STRING(255),
-      allowNull: false,
+      allowNull: true,
     },
     op_cred: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     op_turno: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     extintor: {
       type: DataTypes.STRING(255),
-      allowNull: false,
+      allowNull: true,
     },
     estatus: {
       type: DataTypes.INTEGER,
@@ -110,7 +110,7 @@ Pv_estados.init(
     },
     modulo_puerta: {
       type: DataTypes.STRING(255),
-      allowNull: false,
+      allowNull: true,
     },
     hora_entrada_operador: {
       type: DataTypes.TIME,
@@ -127,5 +127,5 @@ Pv_estados.init(
 Pv_estados.belongsTo(Motivo, {
   foreignKey: "motivo_id",
   targetKey: "id",
-  as: "detalleMotivo"
+  as: "detalleMotivo",
 });
