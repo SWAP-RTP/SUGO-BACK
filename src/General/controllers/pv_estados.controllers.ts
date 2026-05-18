@@ -3,10 +3,12 @@ import {
   obtenerPv_estados,
   crearPv_estado,
   obtenerPv_estados_Recepcion,
-  eliminarPvEstado
-
+  eliminarPvEstado,
 } from "../services/pv_estados.services";
 
+// get
+
+// Controller para obtener los estados de PV
 export async function getPv_estados(req: Request, res: Response) {
   try {
     const pv_estados = await obtenerPv_estados();
@@ -19,19 +21,25 @@ export async function getPv_estados(req: Request, res: Response) {
   }
 }
 
+// Controller para obtener los estados de PV de Recepción
 export async function getPv_estados_Recepcion(req: Request, res: Response) {
   try {
     const pv_estados = await obtenerPv_estados_Recepcion();
     res.json(pv_estados);
   } catch (error) {
     console.error("Error al obtener los estados de recepcion", error);
-    res.status(500).json({ message: "Error al obtener los estados de Recepcion", error: error });
+    res
+      .status(500)
+      .json({
+        message: "Error al obtener los estados de Recepcion",
+        error: error,
+      });
   }
 }
 
+// post
+
 // Controller para crear un estado de PV
-
-
 export async function postPv_estado(req: Request, res: Response) {
   try {
     const data = req.body;
@@ -50,4 +58,4 @@ export async function deletePvEstado(req: Request, res: Response) {
   } catch (error) {
     res.status(500).json({ message: "Error al eliminar el estado de PV" });
   }
-};
+}
