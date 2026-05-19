@@ -14,7 +14,7 @@ export interface pv_estados {
   ruta_cc: string;
   op_cred: number;
   op_turno: number;
-  extintor: number;
+  extintor: string;
   estatus: number;
   createdAt: string;
   createdBy: number;
