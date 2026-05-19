@@ -6,7 +6,7 @@ import { Motivo } from "../models/motivos.models";
 export async function obtenerPv_estados() {
   return await Pv_estados.findAll({
     limit: 1000,
-    order: [["id", "DESC"]],
+    order: [["eco", "desc"]],
     where: {
       tipo: 1,
     },
