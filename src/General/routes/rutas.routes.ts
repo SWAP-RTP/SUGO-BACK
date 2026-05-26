@@ -1,6 +1,8 @@
 import { Router } from "express";
-import { rutasController } from "../controllers/rutas.controllers";
+import { rutasController, rutasCCController } from "../controllers/rutas.controllers";
+import { verifyToken } from "../middlewares/verifyToken";
 
 const router = Router();
-router.get("/rutas", rutasController);
+router.get("/rutas", verifyToken, rutasController);
+router.get("/rutas/cc/:rutaNombre", verifyToken, rutasCCController);
 export default router;

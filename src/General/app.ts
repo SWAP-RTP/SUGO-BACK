@@ -21,8 +21,6 @@ app.use("/api", motivosRoutes);
 app.use("/api", pvEstadosRoutes);
 app.use("/api", modalidadRoutes);
 app.use("/api", rutasRoutes);
-// pendiente por revisar
-app.use("/api", rutasRoutes);
 
 // ROL
 app.use("/api", uploadRolArchivoRoutes);
