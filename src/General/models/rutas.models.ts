@@ -4,8 +4,9 @@ import { DataTypes, Model } from "sequelize";
 import sequelize from "../DB/db";
 // importamos la interfaz que define la estructura de los datos de una ruta
 import { Ruta } from "../interfaces/rutas.interface";
+import { RutaPuntos } from "./ruta_punto.models";
 
-export class Rutas extends Model<Ruta> {}
+export class Rutas extends Model<Ruta> { }
 
 Rutas.init(
   {
@@ -82,3 +83,13 @@ Rutas.init(
     timestamps: false,
   },
 );
+
+Rutas.belongsTo(RutaPuntos, {
+  foreignKey: 'ruta_origen_cve',
+  as: 'origen',
+});
+
+Rutas.belongsTo(RutaPuntos, {
+  foreignKey: 'ruta_destino_cve',
+  as: 'destino',
+});

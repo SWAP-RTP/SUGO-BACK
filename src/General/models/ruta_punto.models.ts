@@ -2,18 +2,16 @@ import { DataTypes, Model } from "sequelize";
 import sequelize from "../DB/db";
 import { RutaPunto } from "../interfaces/rutas.interface";
 
-export class RutaPuntos extends Model<RutaPunto> {}
+export class RutaPuntos extends Model<RutaPunto> { }
 
 RutaPuntos.init(
   {
     punto_cve: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       primaryKey: true,
     },
     punto_nombre: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     punto_descrip: {
       type: DataTypes.STRING,
