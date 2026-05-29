@@ -11,6 +11,9 @@ HoraPresentacion.init(
       primaryKey: true,
       autoIncrement: true,
     },
+    economico: {
+      type: DataTypes.INTEGER,
+    },
     credencial: {
       type: DataTypes.INTEGER,
     },
