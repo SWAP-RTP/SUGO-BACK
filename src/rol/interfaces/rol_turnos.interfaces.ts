@@ -2,6 +2,8 @@ export interface RolTurnos {
   id: number;
   id_archivo: number;
   nombre_ruta: string;
+  modalidad?: string;
+  modulo?: number;
   economico: number;
   sistema: string;
   primer_t: number;
