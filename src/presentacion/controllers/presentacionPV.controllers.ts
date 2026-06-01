@@ -12,7 +12,9 @@ export const HoraPresentacionController = async (
   res: Response,
 ) => {
   try {
-    const HoraPresentacion = await getHoraPresentacion();
+    const moduloStr = req.query.modulo as string;
+    const modulo = moduloStr ? Number(moduloStr) : undefined;
+    const HoraPresentacion = await getHoraPresentacion(modulo);
     res.status(200).json(HoraPresentacion);
   } catch (error) {
     res.status(500).json({ message: "error" });

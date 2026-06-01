@@ -11,7 +11,9 @@ import {
 // Controller para obtener los estados de PV
 export async function getPv_estados(req: Request, res: Response) {
   try {
-    const pv_estados = await obtenerPv_estados();
+    const moduloStr = req.query.modulo as string;
+    const modulo = moduloStr ? Number(moduloStr) : undefined;
+    const pv_estados = await obtenerPv_estados(modulo);
     res.json(pv_estados);
   } catch (error) {
     console.error("Error al obtener los estados de PV:", error);
@@ -24,7 +26,9 @@ export async function getPv_estados(req: Request, res: Response) {
 // Controller para obtener los estados de PV de Recepción
 export async function getPv_estados_Recepcion(req: Request, res: Response) {
   try {
-    const pv_estados = await obtenerPv_estados_Recepcion();
+    const moduloStr = req.query.modulo as string;
+    const modulo = moduloStr ? Number(moduloStr) : undefined;
+    const pv_estados = await obtenerPv_estados_Recepcion(modulo);
     res.json(pv_estados);
   } catch (error) {
     console.error("Error al obtener los estados de recepcion", error);

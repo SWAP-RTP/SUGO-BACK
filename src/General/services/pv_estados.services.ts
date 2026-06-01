@@ -3,13 +3,17 @@ import { Motivo } from "../models/motivos.models";
 
 // Get
 // Obtener los últimos 1000 registros de pv_estados con tipo 1 (Despacho)
-export async function obtenerPv_estados() {
+export async function obtenerPv_estados(modulo?: number) {
+  const whereCondition: any = {
+    eco_estatus: 1,
+  };
+  if (modulo !== undefined) {
+    whereCondition.id_modulo = modulo;
+  }
   return await Pv_estados.findAll({
     limit: 1000,
     order: [["id", "DESC"]],
-    where: {
-      eco_estatus: 1,
-    },
+    where: whereCondition,
     include: [
       {
         model: Motivo,
@@ -22,13 +26,17 @@ export async function obtenerPv_estados() {
 
 // get
 // Obtener los últimos 1000 registros de pv_estados con tipo 2 (Recepción)
-export async function obtenerPv_estados_Recepcion() {
+export async function obtenerPv_estados_Recepcion(modulo?: number) {
+  const whereCondition: any = {
+    eco_estatus: 2,
+  };
+  if (modulo !== undefined) {
+    whereCondition.id_modulo = modulo;
+  }
   return await Pv_estados.findAll({
     limit: 1000,
     order: [["id", "DESC"]],
-    where: {
-      eco_estatus: 2,
-    },
+    where: whereCondition,
     include: [
       {
         model: Motivo,
