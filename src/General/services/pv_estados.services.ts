@@ -8,7 +8,7 @@ export async function obtenerPv_estados() {
     limit: 1000,
     order: [["id", "DESC"]],
     where: {
-      tipo: 1,
+      eco_estatus: 1,
     },
     include: [
       {
@@ -27,7 +27,7 @@ export async function obtenerPv_estados_Recepcion() {
     limit: 1000,
     order: [["id", "DESC"]],
     where: {
-      tipo: 2,
+      eco_estatus: 2,
     },
     include: [
       {

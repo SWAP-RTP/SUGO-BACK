@@ -4,10 +4,10 @@ import { DataTypes, Model } from "sequelize";
 import sequelize from "../DB/db";
 
 // importamos la interfaz que define la estructura de los datos del motivo
-import { pv_estados } from "../interfaces/pv_estados.interface";
+import { pv_registros } from "../interfaces/pv_estados.interface";
 import { Motivo } from "./motivos.models";
 
-export class Pv_estados extends Model<pv_estados> {}
+export class Pv_estados extends Model<pv_registros> {}
 
 Pv_estados.init(
   {
@@ -16,116 +16,108 @@ Pv_estados.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    momento: {
+    id_modulo: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    economico: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    id_motivos: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    credencial: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    turno: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    tipo_eco: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    extintor_1: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    extintor_2: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    id_modalidad: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    id_ruta: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    cc: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    observaciones: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    verificentro: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    taller: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    direccion: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    origen: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    destino: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    tipo_termino: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    tipo_combustible: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    linea_ruta: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    fecha: {
       type: DataTypes.DATE,
-      allowNull: true,
+      allowNull: false,
     },
-    tipo: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
-    eco: {
-      type: DataTypes.INTEGER,
+    hora: {
+      type: DataTypes.TIME,
       allowNull: false,
     },
     eco_estatus: {
       type: DataTypes.INTEGER,
-      allowNull: true,
-    },
-    eco_tipo: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
-    motivo_id: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
-    motivo_desc: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-    },
-    modulo: {
-      type: DataTypes.INTEGER,
       allowNull: false,
     },
-    direccion: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-    },
-    ruta: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-    },
-    ruta_modalidad: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-    },
-    ruta_cc: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-    },
-    op_cred: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
-    op_turno: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
-    extintor: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-    },
-    estatus: {
-      type: DataTypes.INTEGER,
-      defaultValue: 1,
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: true,
-    },
-    createdBy: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
-    createdBy_modulo: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: true,
-    },
-    updatedBy: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
-    prev_values: {
-      type: DataTypes.JSONB,
-      allowNull: true,
-    },
-    registro_id: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
-    modulo_puerta: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-    },
-    hora_entrada_operador: {
-      type: DataTypes.TIME,
-      allowNull: true,
-    },
   },
+
   {
     sequelize,
-    tableName: "pv_estados",
+    tableName: "pv_registros",
     timestamps: false,
   },
 );
-
 Pv_estados.belongsTo(Motivo, {
-  foreignKey: "motivo_id",
+  foreignKey: "id_motivos",
   targetKey: "id",
   as: "detalleMotivo",
 });
