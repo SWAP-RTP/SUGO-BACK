@@ -19,6 +19,14 @@ Turnos.init(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    modalidad: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    modulo: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
     economico: {
       type: DataTypes.INTEGER,
       allowNull: false,

@@ -6,6 +6,8 @@ import { guardarTurnosRolLote } from "../services/rol_turnos.services";
 import { guardarDetallesTurnosLote } from "../services/rol_turno_detalle.services";
 import { rolArchivo } from "../models/rol_archivo.models";
 import { rolRutas } from "../models/rol_rutas.models";
+import { Rutas } from "../../General/models/rutas.models";
+import { Modalidades } from "../../General/models/modalidad.models";
 import * as XLSX from "xlsx";
 
 export const uploadRolArchivo = async (req: Request, res: Response) => {
@@ -87,6 +89,40 @@ export const uploadRolArchivo = async (req: Request, res: Response) => {
         rutasMap.set(nombreRuta, rutaId);
       });
 
+      // Consultar rutas y modalidades en la base de datos para mapear
+      const routeModMap = new Map<string, string>();
+      try {
+        const dbRutas = await Rutas.findAll({
+          attributes: ["ruta_nombre", "ruta_cve_servicio"],
+          where: {
+            mod_clave: modulo,
+            ruta_status: 1
+          },
+          transaction
+        });
+
+        const dbModalidades = await Modalidades.findAll({
+          attributes: ["ruta_cve_servicio", "servicio_descrip"],
+          transaction
+        });
+
+        const modMap = new Map<number, string>();
+        dbModalidades.forEach((m) => {
+          modMap.set(m.getDataValue("ruta_cve_servicio"), m.getDataValue("servicio_descrip"));
+        });
+
+        dbRutas.forEach((r) => {
+          const nombre = r.getDataValue("ruta_nombre");
+          const servKey = r.getDataValue("ruta_cve_servicio");
+          const desc = modMap.get(servKey) || "";
+          if (nombre && desc) {
+            routeModMap.set(nombre.trim().toUpperCase(), desc);
+          }
+        });
+      } catch (dbErr) {
+        console.warn("⚠️ Advertencia al consultar modalidades/rutas de la DB:", dbErr);
+      }
+
       // Preparar turnos para guardar
       const turnosParaGuardar: any[] = [];
       const turnosLVParaGuardar: any[] = [];
@@ -114,6 +150,10 @@ export const uploadRolArchivo = async (req: Request, res: Response) => {
 
       if (Array.isArray(hojasRoles)) {
         hojasRoles.forEach((hoja) => {
+          const rKey = (hoja.nombreHoja || "").trim().toUpperCase();
+          const dbMod = routeModMap.get(rKey);
+          const modalidadFinal = dbMod || hoja.modalidad || "";
+
           if (Array.isArray(hoja.filas)) {
             hoja.filas.forEach((fila: any) => {
               // Validar que los campos numéricos sean válidos
@@ -126,6 +166,8 @@ export const uploadRolArchivo = async (req: Request, res: Response) => {
                 turnosParaGuardar.push({
                   id_archivo: idArchivo,
                   nombre_ruta: hoja.nombreHoja,
+                  modalidad: modalidadFinal,
+                  modulo: modulo,
                   economico: economico || 0,
                   sistema: fila.sistema || "",
                   primer_t: primerT || 0,
