@@ -6,7 +6,9 @@ import { guardarTurnosRolLote, guardarTurnoEditado, ejecutarCierreDia } from "..
 // controlador para obtener los turnos
 export const getTurnosRol = async (req: Request, res: Response) => {
   try {
-    const turnos = await obtenerTurnosRol();
+    const moduloStr = req.query.modulo as string;
+    const modulo = moduloStr ? Number(moduloStr) : undefined;
+    const turnos = await obtenerTurnosRol(modulo);
     res.json(turnos);
   } catch (error) {
     console.error("Error al obtener los turnos del rol:", error);
@@ -49,11 +51,13 @@ export const postTurnoEditado = async (req: Request, res: Response) => {
 // controlador para el cierre del día
 export const postCierreDia = async (req: Request, res: Response) => {
   try {
-    // Ejecutar el stored procedure
-    const resultado = await ejecutarCierreDia();
-
-    // Después de ejecutar el SP, obtener los nuevos datos del último lote
-    const nuevosTurnos = await obtenerTurnosRol();
+    const moduloStr = req.query.modulo as string;
+    const modulo = moduloStr ? Number(moduloStr) : undefined;
+    if (!modulo) {
+      return res.status(400).json({ error: "El modulo es requerido" });
+    }
+    const resultado = await ejecutarCierreDia(modulo);
+    const nuevosTurnos = await obtenerTurnosRol(modulo);
 
     res.status(200).json({
       message: "Cierre de día ejecutado exitosamente",

@@ -19,7 +19,8 @@ export const obtenerRutasPorModulo = async (modClav: number): Promise<RutaSwap[]
       ],
       where: {
         mod_clave: modClav,
-        ruta_status: 1
+        ruta_status: 1,
+        ruta_cve_movi: 1
       },
       include: [
         {
