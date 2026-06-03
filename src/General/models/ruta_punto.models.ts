@@ -1,5 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-import sequelize from "../DB/db";
+import sequelizeSwap from "../DB/dbswap";
 import { RutaPunto } from "../interfaces/rutas.interface";
 
 export class RutaPuntos extends Model<RutaPunto> { }
@@ -22,7 +22,7 @@ RutaPuntos.init(
     },
   },
   {
-    sequelize,
+    sequelize: sequelizeSwap,
     tableName: "op_ruta_punto",
     timestamps: false,
   },

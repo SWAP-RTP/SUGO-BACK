@@ -3,6 +3,7 @@ import sequelize from "../DB/dbswap";
 import { RutaSwap } from "../interfaces/rutas.interface";
 import { Rutas } from "../models/rutas.models";
 import { RutaPuntos } from "../models/ruta_punto.models";
+import { Modalidades } from "../models/modalidad.models";
 
 
 //FUNCION PARA GENERAR LAS RUTAS YA UNIDAS PARA EL FRONTEND
@@ -15,7 +16,8 @@ export const obtenerRutasPorModulo = async (modClav: number): Promise<RutaSwap[]
         "ruta_nombre",
         "ruta_trayecto",
         "ruta_origen_cve",
-        "ruta_destino_cve"
+        "ruta_destino_cve",
+        "ruta_cve_servicio"
       ],
       where: {
         mod_clave: modClav,
@@ -33,6 +35,11 @@ export const obtenerRutasPorModulo = async (modClav: number): Promise<RutaSwap[]
           as: "destino",
           attributes: ["punto_nombre", "punto_descrip"],
         },
+        {
+          model: Modalidades,
+          as: "servicio",
+          attributes: ["ruta_cve_servicio", "servicio_descrip"]
+        }
       ],
     });
 
@@ -44,12 +51,15 @@ export const obtenerRutasPorModulo = async (modClav: number): Promise<RutaSwap[]
         ruta_nombre: ruta.ruta_nombre,
         ruta_trayecto: ruta.ruta_trayecto,
         ruta_origen_cve: ruta.ruta_origen_cve,
-        //ACCEDEMOS A LOS DAOTS DE LA RELACION DEL JOIN
+        //ACCEDEMOS A LOS DATOS DE LA RELACION DEL JOIN
         origen_nombre: ruta.origen?.punto_nombre || "",
         origen_descripcion: ruta.origen?.punto_descrip || "",
         ruta_destino_cve: ruta.ruta_destino_cve,
         destino_nombre: ruta.destino?.punto_nombre || "",
-        destino_descripcion: ruta.destino?.punto_descrip || ""
+        destino_descripcion: ruta.destino?.punto_descrip || "",
+        modalidad_servicio: ruta.servicio?.ruta_cve_servicio || null,
+        modalidad_descripcion: ruta.servicio?.servicio_descrip || "",
+
       };
     });
     return rutasFormateadas as RutaSwap[];

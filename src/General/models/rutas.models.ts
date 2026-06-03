@@ -1,10 +1,12 @@
 // importamos las dependencias necesarias para definir el modelo de Sequelize
 import { DataTypes, Model } from "sequelize";
 // importamos la instancia de Sequelize configurada en nuestro proyecto
-import sequelize from "../DB/db";
+import sequelizeSwap from "../DB/dbswap";
 // importamos la interfaz que define la estructura de los datos de una ruta
 import { Ruta } from "../interfaces/rutas.interface";
 import { RutaPuntos } from "./ruta_punto.models";
+import { Modalidades } from "./modalidad.models";
+
 
 export class Rutas extends Model<Ruta> { }
 
@@ -78,7 +80,7 @@ Rutas.init(
     },
   },
   {
-    sequelize,
+    sequelize: sequelizeSwap,
     tableName: "op_ruta",
     timestamps: false,
   },
@@ -92,4 +94,9 @@ Rutas.belongsTo(RutaPuntos, {
 Rutas.belongsTo(RutaPuntos, {
   foreignKey: 'ruta_destino_cve',
   as: 'destino',
+});
+
+Rutas.belongsTo(Modalidades, {
+  foreignKey: 'ruta_cve_servicio',
+  as: 'servicio'
 });

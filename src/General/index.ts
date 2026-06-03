@@ -1,5 +1,8 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import sequelize from "./DB/db";
+import sequelizeSwap from "./DB/dbswap";
 import app from "./app";
 import "../rol/index"; // ← AGREGAR ESTA LÍNEA para importar el rol
 
@@ -9,6 +12,15 @@ app.get("/test-db", async (req, res) => {
   try {
     await sequelize.authenticate();
     res.json({ message: "¡Conexión a la base de datos exitosa!" });
+  } catch (error) {
+    res.status(500).json({ error: "Error de conexión", details: error });
+  }
+});
+
+app.get("/test-db-swap", async (req, res) => {
+  try {
+    await sequelizeSwap.authenticate();
+    res.json({ message: "¡Conexión a la base de datos swap exitosa!" });
   } catch (error) {
     res.status(500).json({ error: "Error de conexión", details: error });
   }
