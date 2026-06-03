@@ -6,4 +6,5 @@ export interface PresentacionPV {
   fecha?: Date;
   hora?: Date;
   modulo?: number;
+  modalidad?: string | null;
 }
