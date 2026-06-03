@@ -1,8 +1,8 @@
 import { DataTypes, Model } from "sequelize";
-import sequelize from "../DB/db";
+import sequelizeSwap from "../DB/dbswap";
 import { Modalidad } from "../interfaces/modalidad.interface";
 
-export class Modalidades extends Model<Modalidad> {}
+export class Modalidades extends Model<Modalidad> { }
 
 Modalidades.init(
   {
@@ -21,7 +21,7 @@ Modalidades.init(
     },
   },
   {
-    sequelize,
+    sequelize: sequelizeSwap,
     tableName: "op_ruta_serv",
     timestamps: false,
   },
