@@ -3,7 +3,14 @@ import { PresentacionPV } from "../interface/presentacionPV.interface";
 
 // GET
 // servicio para obtener hora de presentacion
-export const getHoraPresentacion = async () => {
+export const getHoraPresentacion = async (modulo?: number) => {
+  if (modulo !== undefined) {
+    return await HoraPresentacion.findAll({
+      where: {
+        modulo: modulo,
+      },
+    });
+  }
   return await HoraPresentacion.findAll();
 };
 

@@ -42,7 +42,7 @@ Pv_estados.init(
     },
     extintor_1: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     extintor_2: {
       type: DataTypes.INTEGER,

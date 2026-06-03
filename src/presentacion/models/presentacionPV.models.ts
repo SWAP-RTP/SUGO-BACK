@@ -29,6 +29,9 @@ HoraPresentacion.init(
     modulo: {
       type: DataTypes.INTEGER,
     },
+    modalidad: {
+      type: DataTypes.STRING,
+    },
   },
   {
     sequelize,
