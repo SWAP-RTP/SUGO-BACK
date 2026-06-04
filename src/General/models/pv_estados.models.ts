@@ -7,7 +7,32 @@ import sequelize from "../DB/db";
 import { pv_registros } from "../interfaces/pv_estados.interface";
 import { Motivo } from "./motivos.models";
 
-export class Pv_estados extends Model<pv_registros> {}
+export class Pv_estados extends Model<pv_registros> {
+  declare id: number;
+  declare id_modulo: number;
+  declare economico: number;
+  declare id_motivos: number;
+  declare credencial: number;
+  declare turno: number;
+  declare tipo_eco: number;
+  declare extintor_1: number;
+  declare extintor_2: number;
+  declare id_modalidad: number;
+  declare id_ruta: number;
+  declare cc: number;
+  declare observaciones: string;
+  declare verificentro: string;
+  declare taller: string;
+  declare direccion: string;
+  declare origen: string;
+  declare destino: string;
+  declare tipo_termino: number;
+  declare tipo_combustible: number;
+  declare linea_ruta: string;
+  declare fecha: Date;
+  declare hora: Date;
+  declare eco_estatus: number;
+}
 
 Pv_estados.init(
   {

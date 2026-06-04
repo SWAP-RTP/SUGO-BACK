@@ -4,6 +4,7 @@ import {
   crearPv_estado,
   obtenerPv_estados_Recepcion,
   eliminarPvEstado,
+  obtenerUltimoRegistroPorEconomico
 } from "../services/pv_estados.services";
 
 // get
@@ -61,5 +62,41 @@ export async function deletePvEstado(req: Request, res: Response) {
     res.status(200).json({ message: "Registro eliminado correctamente" });
   } catch (error) {
     res.status(500).json({ message: "Error al eliminar el estado de PV" });
+  }
+}
+
+export async function verificarEconomico(req: Request, res: Response) {
+  try {
+    const { economico } = req.params;
+
+    if (!economico) {
+      return res.status(400).json({ message: "El numero economico es requerido" });
+    }
+
+    const ultimoRegistro = await obtenerUltimoRegistroPorEconomico(Number(economico));
+    //PRIMERA REGLA SI NO TIENE REGISTROS PREVIOS EN LA TABLA , NO P[UEDE ENTRAR A PATIO]
+    if (!ultimoRegistro) {
+      return res.status(404).json({
+        valido: false,
+        message: `El Economico ${economico} no cuenta con registros de despacho previos. No se puede registrar su recepcion`,
+      });
+    }
+
+    //SEGUNDA REGLA  SI EL ESTADO ES 2 (RECEPCION), SIGNIFICA QUE YA ESTA EN PATIO
+    if (ultimoRegistro.eco_estatus === 2) {
+      return res.status(400).json({
+        valido: false,
+        message: `El Economico ${economico} ya se encuentra en Patio. Debe salir a Ruta antes de volver a recibirse `,
+      });
+    }
+    //SI PASA LOS FILTROS (eco_estatus 1), es apto para ser recibido
+    res.json({
+      valido: true,
+      registro: ultimoRegistro
+    });
+
+  } catch (error) {
+    console.error("Error al verificar el economico", error);
+    res.status(500).json({ message: "Error al verificar el economico", error });
   }
 }

@@ -60,3 +60,17 @@ export const eliminarPvEstado = async (id: number) => {
   if (!registro) throw new Error("Registro no encontrado");
   await registro.destroy();
 };
+
+//BUSCAR EL ULTIMO REGISTRO DE UN ECONOMICO PARA VALIDAR SU ESTADO ACTUAL 
+export async function obtenerUltimoRegistroPorEconomico(economico: number) {
+  return await Pv_estados.findOne({
+    where: { economico },
+    order: [["id", "DESC"]],//TRAE EL ULTIMO INSERTADO 
+    include: [{
+      model: Motivo,
+      as: "detalleMotivo",
+      attributes: ["desc"]
+    },
+    ],
+  });
+}
