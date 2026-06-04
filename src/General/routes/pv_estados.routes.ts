@@ -4,6 +4,7 @@ import {
   postPv_estado,
   getPv_estados_Recepcion,
   deletePvEstado,
+  verificarEconomico,
   getPv_estados_Activos
 } from "../controllers/pv_estados.controllers";
 
