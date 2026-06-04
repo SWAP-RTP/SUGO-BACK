@@ -9,6 +9,7 @@ export const getHoraPresentacion = async (modulo?: number) => {
       where: {
         modulo: modulo,
       },
+      order: [["id", "DESC"]],
     });
   }
   return await HoraPresentacion.findAll();
