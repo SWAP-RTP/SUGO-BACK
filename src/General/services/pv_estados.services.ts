@@ -56,7 +56,7 @@ export async function crearPv_estado(data: any) {
     const modulo = Number(data.id_modulo);
     // Buscar el último estado de este económico en este módulo
     const ultimoEstado = await Pv_estados.findOne({
-      where: { 
+      where: {
         economico: eco,
         id_modulo: modulo
       },
@@ -76,6 +76,20 @@ export const eliminarPvEstado = async (id: number) => {
   if (!registro) throw new Error("Registro no encontrado");
   await registro.destroy();
 };
+
+//BUSCAR EL ULTIMO REGISTRO DE UN ECONOMICO PARA VALIDAR SU ESTADO ACTUAL.
+export async function obtenerUltimoRegistroPorEconomico(economico: number) {
+  return await Pv_estados.findOne({
+    where: { economico },
+    order: [["id", "DESC"]],//TRAE EL ULTIMO INSERTADO 
+    include: [{
+      model: Motivo,
+      as: "detalleMotivo",
+      attributes: ["desc"]
+    },
+    ],
+  });
+}
 
 export async function obtenerPv_estados_Activos(modulo?: number) {
   // 1. Obtener el max id para cada economico, filtrado opcionalmente por modulo
