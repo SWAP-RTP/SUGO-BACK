@@ -61,7 +61,7 @@ export const eliminarPvEstado = async (id: number) => {
   await registro.destroy();
 };
 
-//BUSCAR EL ULTIMO REGISTRO DE UN ECONOMICO PARA VALIDAR SU ESTADO ACTUAL 
+//BUSCAR EL ULTIMO REGISTRO DE UN ECONOMICO PARA VALIDAR SU ESTADO ACTUAL.
 export async function obtenerUltimoRegistroPorEconomico(economico: number) {
   return await Pv_estados.findOne({
     where: { economico },
