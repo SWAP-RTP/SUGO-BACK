@@ -7,4 +7,5 @@ export interface PresentacionPV {
   hora?: Date;
   modulo?: number;
   modalidad?: string | null;
+  cred_registrador: number;
 }

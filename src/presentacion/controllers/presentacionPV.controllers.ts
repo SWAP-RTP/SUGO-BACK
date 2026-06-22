@@ -29,7 +29,12 @@ export const HoraPresentacionControllerP = async (
   res: Response,
 ) => {
   try {
-    const HoraPresentacion = await HoraPresentacionP(req.body);
+    const credencial_registrador = req.usuario?.id;
+    const bodyConCredencial = {
+      ...req.body,
+      cred_registrador: credencial_registrador
+    };
+    const HoraPresentacion = await HoraPresentacionP(bodyConCredencial);
     res.status(201).json(HoraPresentacion);
   } catch (error) {
     res.status(500).json({ message: "error al crear la hora de presentacion" });
