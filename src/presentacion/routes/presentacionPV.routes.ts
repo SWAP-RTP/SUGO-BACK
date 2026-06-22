@@ -3,6 +3,7 @@ import {
   HoraPresentacionController,
   HoraPresentacionControllerP,
 } from "../controllers/presentacionPV.controllers";
+import { verifyToken } from "../../General/middlewares/verifyToken";
 
 const router = Router();
 
@@ -10,6 +11,6 @@ const router = Router();
 router.get("/hora", HoraPresentacionController);
 
 // POST
-router.post("/horaPost", HoraPresentacionControllerP);
+router.post("/horaPost", verifyToken, HoraPresentacionControllerP);
 
 export default router;

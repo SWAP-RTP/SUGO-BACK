@@ -2,7 +2,7 @@ import { DataTypes, Model } from "sequelize";
 import sequelize from "../../General/DB/db";
 import { PresentacionPV } from "../interface/presentacionPV.interface";
 
-export class HoraPresentacion extends Model<PresentacionPV> {}
+export class HoraPresentacion extends Model<PresentacionPV> { }
 
 HoraPresentacion.init(
   {
@@ -32,6 +32,9 @@ HoraPresentacion.init(
     modalidad: {
       type: DataTypes.STRING,
     },
+    cred_registrador: {
+      type: DataTypes.INTEGER
+    }
   },
   {
     sequelize,
