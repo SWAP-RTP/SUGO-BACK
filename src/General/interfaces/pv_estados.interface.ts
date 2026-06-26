@@ -9,8 +9,8 @@ export interface pv_registros {
   extintor_1: number;
   extintor_2: number;
   id_modalidad: number;
-  id_ruta: number;
-  cc: number;
+  id_ruta: number | string;
+  cc: number | string;
   observaciones: string;
   verificentro: string;
   taller: string;
@@ -23,33 +23,6 @@ export interface pv_registros {
   fecha: Date;
   hora: Date;
   eco_estatus: number;
+  falla: string;
 }
 
-// export interface pv_estados {
-//   id: number;
-//   momento: string;
-//   tipo: number;
-//   eco: number;
-//   eco_estatus: number;
-//   eco_tipo: number;
-//   motivo_id: number;
-//   motivo_desc: string;
-//   modulo: number;
-//   direccion: string;
-//   ruta: string;
-//   ruta_modalidad: string;
-//   ruta_cc: string;
-//   op_cred: number;
-//   op_turno: number;
-//   extintor: string;
-//   estatus: number;
-//   createdAt: string;
-//   createdBy: number;
-//   createdBy_modulo: number;
-//   updatedAt: string;
-//   updatedBy: number;
-//   prev_values: string;
-//   registro_id: number;
-//   modulo_puerta: string;
-//   hora_entrada_operador: string;
-// }

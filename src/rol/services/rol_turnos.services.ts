@@ -115,14 +115,14 @@ export const guardarTurnosRolLote = async (
     opciones,
   );
 
-  await TurnosEdit.bulkCreate(
-    turnos.map((t) => ({
-      ...t,
-      createdat: new Date(),
-      updatedat: new Date(),
-    })),
-    opciones,
-  );
+  // await TurnosEdit.bulkCreate(
+  //   turnos.map((t) => ({
+  //     ...t,
+  //     createdat: new Date(),
+  //     updatedat: new Date(),
+  //   })),
+  //   opciones,
+  // );
 
   return turnosGuardados;
 };

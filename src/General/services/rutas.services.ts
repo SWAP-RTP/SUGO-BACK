@@ -19,6 +19,9 @@ export const obtenerRutasPorModulo = async (modClav: number): Promise<RutaSwap[]
         "ruta_destino_cve",
         "ruta_cve_servicio"
       ],
+      order: [
+        ["ruta_nombre", "ASC"]
+      ],
       where: {
         mod_clave: modClav,
         ruta_status: 1,
