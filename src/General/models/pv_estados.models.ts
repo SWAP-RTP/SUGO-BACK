@@ -32,6 +32,7 @@ export class Pv_estados extends Model<pv_registros> {
   declare fecha: Date;
   declare hora: Date;
   declare eco_estatus: number;
+  declare falla: string;
 }
 
 Pv_estados.init(
@@ -78,11 +79,11 @@ Pv_estados.init(
       allowNull: true,
     },
     id_ruta: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     cc: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     observaciones: {
@@ -133,6 +134,10 @@ Pv_estados.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    falla: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    }
   },
 
   {
